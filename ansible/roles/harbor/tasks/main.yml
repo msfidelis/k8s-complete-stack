@@ -1,0 +1,27 @@
+- name: Download harbor package 
+  command: wget https://storage.googleapis.com/harbor-releases/release-1.8.0/harbor-offline-installer-v1.8.1.tgz -O /tmp/harbor.tgz
+  args: 
+    creates: /tmp/harbor.tgz
+
+- name: Extract harbor.tgz into /tmp/harbor
+  unarchive:
+    src: /tmp/harbor.tgz
+    dest: /tmp
+    remote_src: yes
+  args: 
+    creates: /tmp/harbor
+
+# - name: Generating OpenSSL Keys
+#   command: wget https://storage.googleapis.com/harbor-releases/release-1.8.0/harbor-offline-installer-v1.8.1.tgz -O /tmp/harbor.tgz
+#   args: 
+#     creates: /tmp/harbor.tgz
+
+- name: Test a variable
+  debug: var=inventory_hostname
+
+- template:
+    src: openssl.cnf.j2
+    dest: /etc/ssl/openssl.cnf
+    owner: root
+    group: root
+    mode: 0777

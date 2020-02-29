@@ -1,0 +1,45 @@
+  
+- name: Remove swapfile from /etc/fstab
+  mount:
+    name: swap
+    fstype: swap
+    state: absent
+
+- name: Disable swap
+  command: swapoff -a
+
+- name: update apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install required packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+    state: present
+  vars:
+    packages:
+      - docker.io
+      - docker-compose
+
+- template:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0777
+
+- file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+    recurse: yes
+
+- name: force systemd to reread configs
+  systemd: daemon_reload=yes
+
+# Docker service is disabled by default
+- name: enable Docker service
+  systemd:
+    name: docker
+    enabled: yes
