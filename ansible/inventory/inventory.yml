@@ -1,0 +1,24 @@
+all:
+  hosts:
+  children:
+    # argo:
+      # hosts:
+      #   0.0.0.0:
+    gitea:
+      hosts:
+        0.0.0.0:
+    # drone:
+      # hosts:
+      #   0.0.0.0:
+    harbor:
+      hosts:
+        0.0.0.0:
+    # kubernetes-masters:
+      # hosts:
+      #   0.0.0.0:
+    # kubernetes-nodes:
+      # hosts:
+      #   0.0.0.0:
+    # test:
+      # hosts:
+      #   0.0.0.0:

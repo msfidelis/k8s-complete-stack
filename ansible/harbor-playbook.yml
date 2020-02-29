@@ -1,0 +1,9 @@
+  
+# Install Ansible and Kubernetes
+- hosts: all
+  gather_facts: False
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  roles:
+    - { role: commons }

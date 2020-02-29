@@ -1,7 +1,10 @@
-# Complete stack to running Kubernetes Cluster without any vendor lock-in
+
+# Kubernetes complete ecosystem
+
+### Complete stack to running Kubernetes Cluster without any vendor lock-in
 
 
-# Project Stack 
+## Project Stack 
 
 | Component                 | Project / Technology                  |
 | --------------------------|---------------------------------------|
@@ -13,3 +16,10 @@
 | Delivery                  | [ArgoCD](https://argoproj.github.io)  |
 | Git Server                | [Gitlab](https://about.gitlab.com)    |
 | Git Server2               | [Gitea](https://gitea.io/en-us/)      |
+
+
+## Harbor Deployment 
+
+```bash
+ansible-playbook --private-key configs/example.pem  harbor-playbook.yml
+```
