@@ -1,0 +1,12 @@
+- template:
+    src: kube-flannel.yml
+    dest: /tmp/kube-flannel.yml
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Setup Flannel. Use log to prevent second installation
+  shell: kubectl -n kube-system apply -f /tmp/kube-flannel.yml >> flannel_setup.log
+  args:
+    chdir: $HOME
+    creates: flannel_setup.log

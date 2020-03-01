@@ -1,7 +1,8 @@
 output "ssh_config" {
   value = <<SSHCONFIG
-  
+
   ### Server IP`s to put on your ansible inventory ###
+
   Harbor hosts
     User          ubuntu
     Hostname      ${aws_instance.harbor.public_ip}

@@ -1,0 +1,15 @@
+- name: Kubeadm Reset
+  shell: kubeadm reset -f >> reset.log
+  args:
+    chdir: $HOME
+    creates: reset.log
+
+- name: Join the cluster. Use log to prevent joining twice
+  shell: "{{ hostvars[groups['masters'][0]]['join_command'] }} >> node.log"
+  ignore_errors: yes
+  args:
+    chdir: $HOME
+    creates: node.log
+
+- name: Kubelet file
+  shell: chmod 777 /var/lib/kubelet/config.yaml

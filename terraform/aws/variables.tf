@@ -56,3 +56,28 @@ variable "gitea_instance_type" {
     description = "Gitea instance type"
     default     = "c4.large"
 }
+
+
+################################
+######    KUBERNETES   #########
+################################
+
+variable "kubernetes_master_instance_type" {
+    description = "Kubernetes Master instance type"
+    default     = "c4.large"
+}
+
+variable "kubernetes_master_count" {
+    description = "Kubernetes Master count"
+    default     = 1
+}
+
+variable "kubernetes_nodes_instance_type" {
+    description = "Kubernetes Nodes instance type"
+    default     = "c4.large"
+}
+
+variable "kubernetes_nodes_count" {
+    description = "Kubernetes nodes count"
+    default     = 2
+}

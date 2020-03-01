@@ -1,6 +1,14 @@
 all:
-  hosts:
   children:
+    kubernetes:
+      children:
+        masters:
+          hosts:
+            3.91.235.36:
+        nodes:  
+          hosts:
+            54.198.60.44:
+            35.171.151.61:
     # argo:
       # hosts:
       #   0.0.0.0:
