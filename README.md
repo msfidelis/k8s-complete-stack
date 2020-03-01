@@ -18,6 +18,18 @@
 | Git Server2               | [Gitea](https://gitea.io/en-us/)      |
 
 
+## Kubernetes Cluster Deployment (master and nodes)
+
+This resources will be deployed: 
+
+* Kubernetes masters
+* Kubernetes nodes 
+* Istio 
+
+```
+ansible-playbook --private-key configs/example.pem  kubernetes.yml
+```
+
 ## Harbor Deployment 
 
 ```bash
