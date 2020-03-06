@@ -1,0 +1,9 @@
+- hosts: gitea
+  gather_facts: False
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  roles:
+    - { role: commons }
+    - { role: docker }
+    - { role: gitea }

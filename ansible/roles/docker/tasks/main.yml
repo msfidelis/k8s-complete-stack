@@ -1,4 +1,8 @@
   
+- pip:
+    name:
+      - docker
+
 - name: Remove swapfile from /etc/fstab
   mount:
     name: swap
@@ -21,10 +25,15 @@
   vars:
     packages:
       - docker.io
-      - docker-compose
+
+- name: Download docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.25.4/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: '0777'
 
 - template:
-    src: daemon.json
+    src: daemon.json.j2
     dest: /etc/docker/daemon.json
     owner: root
     group: root
