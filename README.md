@@ -35,3 +35,9 @@ ansible-playbook --private-key configs/example.pem  kubernetes.yml
 ```bash
 ansible-playbook --private-key configs/example.pem  harbor-playbook.yml
 ```
+
+## Gitea Deployment 
+
+```bash
+ansible-playbook --private-key configs/example.pem  gitea-playbook.yml
+```
