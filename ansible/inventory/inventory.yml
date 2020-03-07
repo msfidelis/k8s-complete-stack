@@ -4,23 +4,23 @@ all:
       children:
         masters:
           hosts:
-            18.234.124.139:
+            3.88.86.155:
         nodes:  
           hosts:
-            52.201.97.64:
-            54.165.252.168:
+            3.89.206.121:
+            54.145.107.35:
     # argo:
       # hosts:
       #   0.0.0.0:
     gitea:
       hosts:
-        54.80.115.40:
+        54.172.158.32:
     # drone:
       # hosts:
       #   0.0.0.0:
     harbor:
       hosts:
-        54.157.222.157:
+        54.209.34.100:
     # kubernetes-masters:
       # hosts:
       #   0.0.0.0:
