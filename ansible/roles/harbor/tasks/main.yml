@@ -25,6 +25,12 @@
     group: root
     mode: 0777
 
+- name: docker restart
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: docker
+
 - name: Install harbor with clair
   shell: /tmp/harbor/install.sh --with-clair
   args:

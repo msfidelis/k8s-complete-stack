@@ -14,8 +14,7 @@
 | Registry                  | [Harbor](https://goharbor.io)         |
 | Integration               | [Drone CI](https://drone.io)          |
 | Delivery                  | [ArgoCD](https://argoproj.github.io)  |
-| Git Server                | [Gitlab](https://about.gitlab.com)    |
-| Git Server2               | [Gitea](https://gitea.io/en-us/)      |
+| Git Server                | [Gitea](https://gitea.io/en-us/)      |
 
 
 ## Kubernetes Cluster Deployment (master and nodes)
@@ -26,7 +25,7 @@ This resources will be deployed:
 * Kubernetes nodes 
 * Istio 
 
-```
+```bash
 ansible-playbook --private-key configs/example.pem  kubernetes.yml
 ```
 

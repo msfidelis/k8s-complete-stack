@@ -1,0 +1,34 @@
+- name: update apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install required packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+    state: present
+  vars:
+    packages:
+      - python-minimal
+      - curl
+      - wget
+      - python-pip
+      - python3-pip
+      - supervisor
+
+
+- template:
+    src: gitea.service.j2
+    dest: /etc/systemd/system/gitea.service
+    owner: root
+    group: root
+    mode: 0777
+
+- name: force systemd to reread configs
+  systemd: daemon_reload=yes
+
+- name: enable gitea service
+  systemd:
+    name: gitea
+    enabled: yes

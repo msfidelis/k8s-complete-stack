@@ -5,5 +5,5 @@
   become_user: root
   roles:
     - { role: commons }
-    - { role: docker }
+    # - { role: docker }
     - { role: gitea }
