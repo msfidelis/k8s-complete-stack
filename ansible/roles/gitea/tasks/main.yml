@@ -17,18 +17,65 @@
       - python3-pip
       - supervisor
 
+- name: Add user to gitea
+  user:
+    name: git
+    comment: git
+    shell: /bin/bash
+    group: git
+    create_home: true
+    home: /home/git
 
-- template:
-    src: gitea.service.j2
-    dest: /etc/systemd/system/gitea.service
+- name: Create a /var/lib/gitea/custom directory
+  file:
+    recurse: yes
+    path: /var/lib/gitea/custom
+    state: directory
+    mode: '0750'
     owner: root
-    group: root
-    mode: 0777
+    group: git
 
-- name: force systemd to reread configs
-  systemd: daemon_reload=yes
+- name: Create a /var/lib/gitea/data directory
+  file:
+    recurse: yes
+    path: /var/lib/gitea/data
+    state: directory
+    mode: '0750'
+    owner: root
+    group: git
 
-- name: enable gitea service
-  systemd:
-    name: gitea
-    enabled: yes
+- name: Create a /var/lib/gitea/log directory
+  file:
+    recurse: yes
+    path: /var/lib/gitea/log
+    state: directory
+    mode: '0750'
+    owner: root
+    group: git
+
+- name: Create a /etc/gitea directory
+  file:
+    recurse: yes
+    path: /etc/gitea
+    state: directory
+    mode: '0770'
+    owner: root
+    group: git
+    
+# Using SystemD
+# - template:
+#     src: gitea.service.j2
+#     dest: /etc/systemd/system/gitea.service
+#     owner: root
+#     group: root
+#     mode: 0777
+
+# - name: force systemd to reread configs
+#   systemd: daemon_reload=yes
+
+# - name: enable gitea service
+#   systemd:
+#     name: gitea
+#     enabled: yes
+
+# Using Supervisord
