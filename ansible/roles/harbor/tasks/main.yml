@@ -1,6 +1,5 @@
 - name: Download harbor package 
   command: wget https://storage.googleapis.com/harbor-releases/release-1.8.0/harbor-offline-installer-v1.8.1.tgz -O /tmp/harbor.tgz
-  warn: false
   args: 
     creates: /tmp/harbor.tgz
 
@@ -12,14 +11,16 @@
   args: 
     creates: /tmp/harbor
 
-- template:
+- name: openssl template
+  template:
     src: openssl.cnf.j2
     dest: /etc/ssl/openssl.cnf
     owner: root
     group: root
     mode: 0777
 
-- template:
+- name: create harbor.yml file
+  template:
     src: harbor.yml.j2
     dest: /tmp/harbor/harbor.yml
     owner: root

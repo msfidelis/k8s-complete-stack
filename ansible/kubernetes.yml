@@ -24,10 +24,10 @@
   roles:
     - { role: nodes }
 
-# - hosts: masters
-#   gather_facts: True
-#   remote_user: ubuntu
-#   become: yes
-#   become_user: root
-#   roles:
-#     - { role: istio }
+- hosts: masters
+  gather_facts: True
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  roles:
+    - { role: linkerd }
