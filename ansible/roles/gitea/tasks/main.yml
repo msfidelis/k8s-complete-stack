@@ -15,7 +15,6 @@
       - wget
       - python-pip
       - python3-pip
-      - supervisor
 
 - name: Ensure group "git" exists
   group:
@@ -93,14 +92,6 @@
     group: root
     mode: 0777
 
-# - name: Create supervisord file
-#   template:
-#     src: supervisord.conf.j2
-#     dest: /etc/supervisor/supervisord.conf
-#     owner: root
-#     group: root
-#     mode: 0777
-
 - name: Download gitea
   get_url:
     url: https://dl.gitea.io/gitea/1.11.2/gitea-1.11.2-linux-amd64
@@ -118,13 +109,7 @@
     state: started
     name: gitea
 
-# - name: Enable supervisor service
-#   systemd:
-#     name: supervisor
-#     daemon_reload: yes
-#     enabled: yes
-
-# - name: Start supervisor
-#   systemd:
-#     state: started
-#     name: supervisor
+- name: Restart gitea
+  systemd:
+    state: restarted
+    name: gitea
