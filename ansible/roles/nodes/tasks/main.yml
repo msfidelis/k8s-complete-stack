@@ -1,4 +1,4 @@
-- name: Kubeadm Reset
+  - name: Kubeadm Reset
   shell: kubeadm reset -f >> reset.log
   args:
     chdir: $HOME
@@ -11,5 +11,9 @@
     chdir: $HOME
     creates: node.log
 
-- name: Kubelet file
-  shell: chmod 777 /var/lib/kubelet/config.yaml
+- file:
+    path: /var/lib/kubelet/config.yaml
+    state: file
+    owner: root
+    group: root
+    mode: 0777
