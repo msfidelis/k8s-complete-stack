@@ -7,6 +7,9 @@
 - name: Deploy cert-manager 
   shell: 'kubectl apply -f /tmp/cert-manager.yml'
 
+- name: Verify deployment
+  shell: 'kubectl -n cert-manager rollout status deploy cert-manager'
+
 - name: Put issuer stage template
   template: 
     src: issuer-staging.yml.j2
