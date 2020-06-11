@@ -1,0 +1,35 @@
+- pip:
+    name:
+      - docker
+
+- name: Remove swap file
+  mount:
+    name: swap
+    fstype: swap
+    state: absent
+
+- name: Disable Swap
+  command: swapoff -a
+
+- name: Installing Docker
+  apt: 
+    name: "{{ packages }}"
+    update_cache: false
+    state: present
+  vars:
+    packages:
+      - docker.io
+
+- name: Download Docker Compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.25.5/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: '0777'
+
+- name: Reload configs
+  systemd: daemon_reload=yes
+
+- name: Enable Docker Service
+  systemd:
+    name: docker
+    enabled: yes
