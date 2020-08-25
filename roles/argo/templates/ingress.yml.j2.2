@@ -1,0 +1,87 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+  - secretName: argocd
+    hosts:
+    - {{ argo_url }}
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: argocd-server
+          servicePort: 80
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  virtualhost:
+    fqdn: {{ argo_url }}
+    tls:
+      secretName: argocd
+  routes:
+  - services:
+    - name: argocd-server
+      port: 80
+spec:
+  virtualhost:
+    fqdn: {{ argo_url }}
+  routes:
+    - services:
+        - name: argocd-server
+          port: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+  - secretName: argocd
+    hosts:
+    - {{ argo_grpc }}
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: argocd-server
+          servicePort: 80
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  virtualhost:
+    fqdn: {{ argo_grpc }}
+    tls:
+      secretName: argocd
+  routes:
+  - services:
+    - name: argocd-server
+      port: 80
+spec:
+  virtualhost:
+    fqdn: {{ argo_grpc }}
+  routes:
+    - services:
+        - name: argocd-server
+          port: 80

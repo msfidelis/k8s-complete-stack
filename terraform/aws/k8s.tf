@@ -3,8 +3,6 @@ resource "aws_instance" "master" {
     ami = var.ami
     instance_type = var.kubernetes_master_instance_type
 
-
-
     subnet_id = aws_subnet.public_subnet.id
     associate_public_ip_address = true
 
@@ -15,7 +13,7 @@ resource "aws_instance" "master" {
     key_name = aws_key_pair.cluster_key.key_name
 
     tags = merge(var.tags, { 
-        Name = format("%s-k8s-master", var.project_name)
+        Name = format("k8s-master")
     })
 
 }
@@ -37,7 +35,7 @@ resource "aws_instance" "nodes" {
     key_name        = aws_key_pair.cluster_key.key_name
 
     tags = merge(var.tags, { 
-        Name = format("%s-k8s-node", var.project_name)
+        Name = format("k8s-node-%s", count.index)
     })
 
 }
@@ -93,7 +91,7 @@ resource "aws_security_group" "kubernetes" {
     }
 
     tags = merge(var.tags, { 
-        Name = format("%s-gitea-sg", var.project_name)
+        Name = format("%s-kubernetes-sg", var.project_name)
     })
 
 

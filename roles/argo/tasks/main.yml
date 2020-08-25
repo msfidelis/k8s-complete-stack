@@ -1,0 +1,23 @@
+- name: Download Argo CLI
+  get_url:
+    url: https://github.com/argoproj/argo-cd/releases/download/v1.6.2/argocd-linux-amd64
+    dest: /usr/local/bin/argocd
+    mode: '0777'
+
+- name: Put argocd template
+  template: 
+    src: argo.yml.j2
+    dest: /tmp/argo.yml
+    mode: 0777
+
+- name: Deploy argocd
+  shell: 'kubectl -n argocd apply -f /tmp/argo.yml'
+
+- name: Put argocd dashboard template
+  template: 
+    src: ingress.yml.j2
+    dest: /tmp/argo-ingress.yml
+    mode: 0777
+
+- name: Deploy argocd dashboard
+  shell: 'kubectl -n argocd apply -f /tmp/argo-ingress.yml'

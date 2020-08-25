@@ -1,6 +1,6 @@
 all:
   vars:
-    ansible_ssh_user: matheus
+    ansible_ssh_user: ubuntu
     harbor_admin: cncfdemo
     cert_domain_name: registry.cncf.raj.ninja
     cert_admin_email: matheus@nanoshots.com.br
@@ -10,17 +10,21 @@ all:
         masters:
           vars:
             linkerd_url: linkerd.raj.ninja
+            argo_url: argo.raj.ninja
+            argo_grpc: grpc.argo.raj.ninja
           hosts:
-            35.225.145.103:
+            54.89.20.28:
         nodes:
           hosts:
-            34.72.181.46:
-            35.193.1.28:
-            34.68.114.183:
+            3.81.86.216:
+            54.198.34.238:
+            52.90.184.91:
+            54.87.59.39: 
+
     harbor:
       hosts:
         34.71.192.242
 
     front-proxy:
       hosts:
-        35.184.92.133:
+        54.81.151.29:

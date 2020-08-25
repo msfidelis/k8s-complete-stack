@@ -26,7 +26,7 @@ variable "aws_region" {
 # Customize your key path
 variable "aws_key_path" {
     description = "key_path"
-    default     = "../../ansible/configs/example.pub"
+    default     = "../../cncf_key.pub"
 }
 
 # Tags
@@ -57,6 +57,15 @@ variable "gitea_instance_type" {
     default     = "c4.large"
 }
 
+################################
+######       PROXY        ######
+################################
+
+variable "front_proxy_instance_type" {
+    description = "Front Proxy Instance type"
+    default = "c4.large"
+}
+
 
 ################################
 ######    KUBERNETES   #########
@@ -79,5 +88,5 @@ variable "kubernetes_nodes_instance_type" {
 
 variable "kubernetes_nodes_count" {
     description = "Kubernetes nodes count"
-    default     = 2
+    default     = 4
 }
